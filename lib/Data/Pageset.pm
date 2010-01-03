@@ -9,7 +9,7 @@ use vars qw(@ISA $VERSION);
 
 @ISA = qw(Data::Page);
 
-$VERSION = '1.05';
+$VERSION = '1.06';
 
 =head1 NAME
 
@@ -385,9 +385,9 @@ None by default.
 
 Leo Lapworth C<< <LLAP@cuckoo.org> >>
 
-=head1 SVN
+=head1 REPOSITORY
 
-http://code.google.com/p/llap/
+http://github.com/ranguard/data-pageset
 
 =head1 CONTRIBUTORS
 
