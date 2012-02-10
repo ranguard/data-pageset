@@ -10,3 +10,5 @@ requires:
 
 distribution_type: module
 generated_by: ExtUtils::MakeMaker version 6.17
+resources:
+    repository: https://github.com/ranguard/data-pageset.git
