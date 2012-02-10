@@ -56,15 +56,15 @@ Data::Pageset - Page numbering and page sets
 =head1 DESCRIPTION
 
 The object produced by Data::Pageset can be used to create page
-navigation, it inherits from Data::Page and has access to all 
+navigation. It inherits from Data::Page and has access to all 
 methods from this object.
 
-In addition it also provides methods for dealing with set of pages,
+In addition, it also provides methods for dealing with set of pages,
 so that if there are too many pages you can easily break them
 into chunks for the user to browse through.
 
-You can even choose to view page numbers in your set in a 'sliding'
-fassion.
+You can even choose to view page numbers in your set in a "sliding"
+fashion.
 
 The object can easily be passed to a templating system
 such as Template Toolkit or be used within a script.
@@ -84,13 +84,13 @@ such as Template Toolkit or be used within a script.
   });
 
 This is the constructor of the object, it requires an anonymous
-hash containing the 'total_entries', how many data units you have,
+hash containing the 'total_entries', how many data units you have
 and the number of 'entries_per_page' to display. Optionally
 the 'current_page' (defaults to page 1) and pages_per_set (how
 many pages to display, defaults to 10) can be added. 
 
-The mode (which defaults to 'fixed') determins how the paging
-will work, for example with 10 pages_per_set and the current_page
+The mode (which defaults to 'fixed') determines how the paging
+will work. For example, with 10 pages_per_set and the current_page
 set to 18 you will get the following results:
 
 =head3 Fixed:
@@ -163,7 +163,7 @@ sub new {
 
   $page_info->current_page($page_num);
 
-This method sets the current_page to the argument supplied, it can also be 
+This method sets the current_page to the argument supplied. It can also be 
 set in the constructor, but you may want to reuse the object if printing out
 multiple pages. It will then return the page number once set. 
 
@@ -328,7 +328,7 @@ sub previous_set {
   print "Next set starts at ", $page_info->next_set(), "\n";
 
 This method returns the page number at the start of the next page set.
-undef is return if pages_per_set has not been set.
+undef is returned if pages_per_set has not been set.
 
 =cut  
 
@@ -345,7 +345,7 @@ sub next_set {
   }
 
 This method returns an array ref of the the page numbers within
-the current set. undef is return if pages_per_set has not been set.
+the current set. undef is returned if pages_per_set has not been set.
 
 =cut  
 
