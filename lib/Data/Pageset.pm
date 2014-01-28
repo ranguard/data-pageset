@@ -344,7 +344,7 @@ sub next_set {
     print "Page: $page_num \n";
   }
 
-This method returns an array ref of the the page numbers within
+This method returns an array ref of the page numbers within
 the current set. undef is returned if pages_per_set has not been set.
 
 =cut  
