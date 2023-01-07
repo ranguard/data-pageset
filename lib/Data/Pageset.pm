@@ -387,7 +387,7 @@ Leo Lapworth C<< <LLAP@cuckoo.org> >>
 
 =head1 REPOSITORY
 
-http://github.com/ranguard/data-pageset
+https://github.com/ranguard/data-pageset
 
 =head1 CONTRIBUTORS
 
