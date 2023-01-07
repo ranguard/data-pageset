@@ -76,7 +76,7 @@ MMEETTHHOODDSS
        (defaults to page 1) and pages_per_set (how many pages to display,
        defaults to 10) can be added.
 
-       The mode (which defaults to 'fixed') determins how the paging will
+       The mode (which defaults to 'fixed') determines how the paging will
        work, for example with 10 pages_per_set and the current_page set to 18
        you will get the following results:
 
@@ -120,7 +120,7 @@ MMEETTHHOODDSS
 
          $page_info->pages_per_set($number_of_pages_per_set);
 
-       Calling this method initalises the calculations required to use the
+       Calling this method initialises the calculations required to use the
        paging methods below. The value can also be passed into the constructor
        method _n_e_w_(_).
 

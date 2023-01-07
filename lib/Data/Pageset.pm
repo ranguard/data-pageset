@@ -196,7 +196,7 @@ sub current_page {
 
   $page_info->pages_per_set($number_of_pages_per_set);
 
-Calling this method initalises the calculations required to use
+Calling this method initialises the calculations required to use
 the paging methods below. The value can also be passed into
 the constructor method new().
 

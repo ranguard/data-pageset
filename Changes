@@ -23,7 +23,7 @@ Revision history for Perl extension Data::Pageset.
 1.00 Thurs Oct 26 2004
 	- Added tests to get Devel::Cover to 100%
 	- removed extranious lines of code as checks are in Data::Page
-	- made compatable with Data::Page v 2.00
+	- made compatible with Data::Page v 2.00
 
 0.06  Sun Aug 17 08:27:00 2003
 	- Fixed tests that broke from Data::Page bug fix
