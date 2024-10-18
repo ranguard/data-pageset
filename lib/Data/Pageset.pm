@@ -107,7 +107,7 @@ set to 18 you will get the following results:
 
 21
 
-=back 4
+=back
 
 =head3 Slide:
 
@@ -125,7 +125,7 @@ set to 18 you will get the following results:
 
 24
 
-=back 4
+=back
 
 You can not change modes once the object is created.
 
