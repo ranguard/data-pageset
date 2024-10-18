@@ -5,11 +5,9 @@ use Carp;
 
 use Data::Page;
 
-use vars qw(@ISA $VERSION);
+our @ISA = qw(Data::Page);
 
-@ISA = qw(Data::Page);
-
-$VERSION = '1.06';
+our $VERSION = '1.06';
 
 =head1 NAME
 
