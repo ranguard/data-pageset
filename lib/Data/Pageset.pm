@@ -70,7 +70,7 @@ sub pages_per_set {
 
     $self->{PAGE_SET_PAGES_PER_SET} = $max_pages_per_set;
 
-    unless ( $max_pages_per_set > 1 ) {
+    if ( $max_pages_per_set <= 1 ) {
 
         # Only have one page in the set, must be page 1
         $self->{PAGE_SET_PREVIOUS} = $self->current_page() - 1
@@ -202,6 +202,8 @@ sub _calc_start_page {
 
 1;
 __END__
+
+=for stopwords initialises
 
 =head1 NAME
 
@@ -371,29 +373,6 @@ the current set. undef is returned if pages_per_set has not been set.
 
 None by default.
 
-=head1 AUTHOR
-
-Leo Lapworth C<< <LLAP@cuckoo.org> >>
-
-=head1 REPOSITORY
-
-https://github.com/ranguard/data-pageset
-
-=head1 CONTRIBUTORS
-
-Ryan D Johnson C<< <ryan@innerfence.com> >>
-PLOBBES
-
 =head1 SEE ALSO
 
-L<Data::Page>.
-
-=head1 COPYRIGHT
-
-Copyright (C) 2007, Leo Lapworth
-
-This module is free software; you can redistribute it or modify it
-under the same terms as Perl itself.
-
-=cut
-
+L<Data::Page>

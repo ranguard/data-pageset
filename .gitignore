@@ -1,0 +1,14 @@
+/.build/
+/MANIFEST
+/MANIFEST.bak
+/MYMETA.json
+/MYMETA.json.lock
+/MYMETA.yml
+/Makefile
+/Makefile.old
+/blib/
+/cover_db/
+/pm_to_blib
+/Data-Pageset-*/
+/Data-Pageset-*.tar
+/Data-Pageset-*.tar.gz

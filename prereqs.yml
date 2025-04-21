@@ -1,0 +1,7 @@
+runtime:
+  requires:
+    perl: 5.006
+    Data::Page: 2.00
+test:
+  requires:
+    Test::More: 0.88
