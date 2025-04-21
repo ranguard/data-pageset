@@ -323,8 +323,6 @@ set to 18 you will get the following results:
 
 You can not change modes once the object is created.
 
-=cut
-
 =head2 current_page()
 
     $page_info->current_page($page_num);
@@ -334,8 +332,6 @@ set in the constructor, but you may want to reuse the object if printing out
 multiple pages. It will then return the page number once set.
 
 If this method is called without any arguments it returns the current page number.
-
-=cut
 
 =head2 pages_per_set()
 
@@ -348,8 +344,6 @@ the constructor method new().
 If called without any arguments it will return the current
 number of pages per set.
 
-=cut
-
 =head2 previous_set()
 
     print "Back to previous set which starts at ", $page_info->previous_set(), "\n";
@@ -357,16 +351,12 @@ number of pages per set.
 This method returns the page number at the start of the previous page set.
 undef is return if pages_per_set has not been set.
 
-=cut
-
 =head2 next_set()
 
     print "Next set starts at ", $page_info->next_set(), "\n";
 
 This method returns the page number at the start of the next page set.
 undef is returned if pages_per_set has not been set.
-
-=cut
 
 =head2 pages_in_set()
 
@@ -376,9 +366,6 @@ undef is returned if pages_per_set has not been set.
 
 This method returns an array ref of the page numbers within
 the current set. undef is returned if pages_per_set has not been set.
-
-=cut
-
 
 =head1 EXPORT
 
