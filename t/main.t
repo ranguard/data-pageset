@@ -1,13 +1,9 @@
-#!/usr/bin/perl -w
-
 use strict;
+use warnings;
 
-use lib qw( ./blib/lib ../blib/lib );
+use Test::More;
 
-use Test::More tests => 554;
-
-# Check we can load module
-BEGIN { use_ok( 'Data::Pageset' ); }
+use Data::Pageset;
 
 #######
 # new()
@@ -182,6 +178,8 @@ foreach my $line (<DATA>) {
 #  diag("    next set pis: ", join(",",@{$ns->pages_in_set()}), "\n") if($page->next_set);
 
 }
+
+done_testing;
 
 # 0: total_entries
 # 1: entries_per_page

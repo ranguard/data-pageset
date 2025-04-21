@@ -4,7 +4,7 @@ WriteMakefile(
     VERSION_FROM    => 'lib/Data/Pageset.pm',
     PREREQ_PM       => {
         'Data::Page'    => 2.00,
-        'Test::More'    => 0.1,
+        'Test::More'    => 0.88,
     },
     META_MERGE      => {
         'meta-spec' => { version => 2 },
