@@ -1,6 +1,7 @@
 package Data::Pageset;
-
 use strict;
+use warnings;
+
 use Carp;
 
 use Data::Page;
