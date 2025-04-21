@@ -15,46 +15,46 @@ Data::Pageset - Page numbering and page sets
 
 =head1 SYNOPSIS
 
-  use Data::Pageset;
-  my $page_info = Data::Pageset->new({
-    'total_entries'       => $total_entries, 
-    'entries_per_page'    => $entries_per_page, 
-    # Optional, will use defaults otherwise.
-    'current_page'        => $current_page,
-    'pages_per_set'       => $pages_per_set,
-    'mode'                => 'fixed', # default, or 'slide'
-  });
+    use Data::Pageset;
+    my $page_info = Data::Pageset->new({
+        'total_entries'       => $total_entries,
+        'entries_per_page'    => $entries_per_page,
+        # Optional, will use defaults otherwise.
+        'current_page'        => $current_page,
+        'pages_per_set'       => $pages_per_set,
+        'mode'                => 'fixed', # default, or 'slide'
+    });
 
-  # General page information
-  print "         First page: ", $page_info->first_page, "\n";
-  print "          Last page: ", $page_info->last_page, "\n";
-  print "          Next page: ", $page_info->next_page, "\n";
-  print "      Previous page: ", $page_info->previous_page, "\n";
+    # General page information
+    print "         First page: ", $page_info->first_page, "\n";
+    print "          Last page: ", $page_info->last_page, "\n";
+    print "          Next page: ", $page_info->next_page, "\n";
+    print "      Previous page: ", $page_info->previous_page, "\n";
 
-  # Results on current page
-  print "First entry on page: ", $page_info->first, "\n";
-  print " Last entry on page: ", $page_info->last, "\n";
+    # Results on current page
+    print "First entry on page: ", $page_info->first, "\n";
+    print " Last entry on page: ", $page_info->last, "\n";
 
-  # Can add in the pages per set after the object is created
-  $page_info->pages_per_set($pages_per_set);
-  
-  # Page set information
-  print "First page of previous page set: ",  $page_info->previous_set, "\n";
-  print "    First page of next page set: ",  $page_info->next_set, "\n";
-  
-  # Print the page numbers of the current set
-  foreach my $page (@{$page_info->pages_in_set()}) {
-    if($page == $page_info->current_page()) {
-      print "<b>$page</b> ";
-    } else {
-      print "$page ";
+    # Can add in the pages per set after the object is created
+    $page_info->pages_per_set($pages_per_set);
+
+    # Page set information
+    print "First page of previous page set: ",  $page_info->previous_set, "\n";
+    print "    First page of next page set: ",  $page_info->next_set, "\n";
+
+    # Print the page numbers of the current set
+    foreach my $page (@{$page_info->pages_in_set()}) {
+        if($page == $page_info->current_page()) {
+            print "<b>$page</b> ";
+        } else {
+            print "$page ";
+        }
     }
-  }
 
 =head1 DESCRIPTION
 
 The object produced by Data::Pageset can be used to create page
-navigation. It inherits from Data::Page and has access to all 
+navigation. It inherits from Data::Page and has access to all
 methods from this object.
 
 In addition, it also provides methods for dealing with set of pages,
@@ -71,21 +71,21 @@ such as Template Toolkit or be used within a script.
 
 =head2 new()
 
-  use Data::Pageset;
-  my $page_info = Data::Pageset->new({
-    'total_entries'       => $total_entries, 
-    'entries_per_page'    => $entries_per_page, 
-    # Optional, will use defaults otherwise.
-    'current_page'        => $current_page,
-    'pages_per_set'       => $pages_per_set,
-    'mode'                => 'slide', # default fixed
-  });
+    use Data::Pageset;
+    my $page_info = Data::Pageset->new({
+        'total_entries'       => $total_entries,
+        'entries_per_page'    => $entries_per_page,
+        # Optional, will use defaults otherwise.
+        'current_page'        => $current_page,
+        'pages_per_set'       => $pages_per_set,
+        'mode'                => 'slide', # default fixed
+    });
 
 This is the constructor of the object, it requires an anonymous
 hash containing the 'total_entries', how many data units you have
 and the number of 'entries_per_page' to display. Optionally
 the 'current_page' (defaults to page 1) and pages_per_set (how
-many pages to display, defaults to 10) can be added. 
+many pages to display, defaults to 10) can be added.
 
 The mode (which defaults to 'fixed') determines how the paging
 will work. For example, with 10 pages_per_set and the current_page
@@ -99,7 +99,7 @@ set to 18 you will get the following results:
 
 11,12,13,14,15,16,17,18,19,20
 
-=item Previous page set:  
+=item Previous page set:
 
 1
 
@@ -117,7 +117,7 @@ set to 18 you will get the following results:
 
 14,15,16,17,18,19,20,21,22,23
 
-=item Previous page set:  
+=item Previous page set:
 
 9
 
@@ -159,11 +159,11 @@ sub new {
 
 =head2 current_page()
 
-  $page_info->current_page($page_num);
+    $page_info->current_page($page_num);
 
-This method sets the current_page to the argument supplied. It can also be 
+This method sets the current_page to the argument supplied. It can also be
 set in the constructor, but you may want to reuse the object if printing out
-multiple pages. It will then return the page number once set. 
+multiple pages. It will then return the page number once set.
 
 If this method is called without any arguments it returns the current page number.
 
@@ -192,7 +192,7 @@ sub current_page {
 
 =head2 pages_per_set()
 
-  $page_info->pages_per_set($number_of_pages_per_set);
+    $page_info->pages_per_set($number_of_pages_per_set);
 
 Calling this method initialises the calculations required to use
 the paging methods below. The value can also be passed into
@@ -284,8 +284,8 @@ sub pages_per_set {
 
                     # near the end of the page numbers
                     $self->{PAGE_SET_PREVIOUS}
-                        = $self->last_page() 
-                        - $max_pages_per_set 
+                        = $self->last_page()
+                        - $max_pages_per_set
                         - $middle + 1;
                     $self->{PAGE_SET_PAGES}
                         = [ ( $self->last_page() - $max_pages_per_set + 1 )
@@ -308,12 +308,12 @@ sub pages_per_set {
 
 =head2 previous_set()
 
-  print "Back to previous set which starts at ", $page_info->previous_set(), "\n";
+    print "Back to previous set which starts at ", $page_info->previous_set(), "\n";
 
 This method returns the page number at the start of the previous page set.
 undef is return if pages_per_set has not been set.
 
-=cut  
+=cut
 
 sub previous_set {
     my $self = shift;
@@ -323,12 +323,12 @@ sub previous_set {
 
 =head2 next_set()
 
-  print "Next set starts at ", $page_info->next_set(), "\n";
+    print "Next set starts at ", $page_info->next_set(), "\n";
 
 This method returns the page number at the start of the next page set.
 undef is returned if pages_per_set has not been set.
 
-=cut  
+=cut
 
 sub next_set {
     my $self = shift;
@@ -338,14 +338,14 @@ sub next_set {
 
 =head2 pages_in_set()
 
-  foreach my $page_num (@{$page_info->pages_in_set()}) {
-    print "Page: $page_num \n";
-  }
+    foreach my $page_num (@{$page_info->pages_in_set()}) {
+        print "Page: $page_num \n";
+    }
 
 This method returns an array ref of the page numbers within
 the current set. undef is returned if pages_per_set has not been set.
 
-=cut  
+=cut
 
 sub pages_in_set {
     my $self = shift;

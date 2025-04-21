@@ -13,50 +13,50 @@ BEGIN { use_ok( 'Data::Pageset' ); }
 # new()
 #######
 eval {
-	Data::Pageset->new();
+    Data::Pageset->new();
 };
 like($@,qr/total_entries and entries_per_page must be supplied/,'new - Croak when no params');
 
 eval {
-	Data::Pageset->new({
-		'total_entries' => 12,
-	});
+    Data::Pageset->new({
+        'total_entries' => 12,
+    });
 };
 like($@,qr/total_entries and entries_per_page must be supplied/,'new - Croak when no entries_per_page');
 
 eval {
-	Data::Pageset->new({
-		'entries_per_page' => 3,
-	});
+    Data::Pageset->new({
+        'entries_per_page' => 3,
+    });
 };
 like($@,qr/total_entries and entries_per_page must be supplied/,'new - Croak when no entries_per_page');
 
 eval {
-	Data::Pageset->new({
-		'total_entries' => 12,
-		'entries_per_page' => -2,
-	});
+    Data::Pageset->new({
+        'total_entries' => 12,
+        'entries_per_page' => -2,
+    });
 };
 like($@,qr/Fewer than one entry per page/,'new - Croak when num entries_per_page is negative');
 
 
 my $dp = Data::Pageset->new({
-	'total_entries' => '23',
-	'entries_per_page' => '2',
+    'total_entries' => '23',
+    'entries_per_page' => '2',
 });
 is($dp->current_page(),'1','new - Default current page of 1 set');
 
 $dp = Data::Pageset->new({
-	'total_entries' => '23',
-	'entries_per_page' => '2',
-	'current_page' => -90,
+    'total_entries' => '23',
+    'entries_per_page' => '2',
+    'current_page' => -90,
 });
 is($dp->current_page(),'1','new - Default current page of 1 set when current_page less than first_page');
 
 $dp = Data::Pageset->new({
-	'total_entries' => '20',
-	'entries_per_page' => '10',
-	'current_page' => 9,
+    'total_entries' => '20',
+    'entries_per_page' => '10',
+    'current_page' => 9,
 });
 is($dp->current_page(),'2','new - Default current page set to last page when current_page greater than last_page');
 
@@ -67,17 +67,17 @@ is($dp->current_page(),'2','new - Default current page set to last page when cur
 is($dp->pages_per_set(),10,'pages_per_set - get undef when not defined');
 
 $dp = Data::Pageset->new({
-	'total_entries' => '20',
-	'entries_per_page' => '10',
-	'current_page' => 4,
-	'pages_per_set' => 2,
+    'total_entries' => '20',
+    'entries_per_page' => '10',
+    'current_page' => 4,
+    'pages_per_set' => 2,
 });
 
 $dp = Data::Pageset->new({
-	'total_entries' => '20',
-	'entries_per_page' => '10',
-	'current_page' => 4,
-	'pages_per_set' => -2,
+    'total_entries' => '20',
+    'entries_per_page' => '10',
+    'current_page' => 4,
+    'pages_per_set' => -2,
 });
 
 #####
@@ -85,8 +85,8 @@ $dp = Data::Pageset->new({
 ######
 
 $dp = Data::Pageset->new({
-	'total_entries' => '20',
-	'entries_per_page' => '10',
+    'total_entries' => '20',
+    'entries_per_page' => '10',
 });
 
 #is($dp->current_page(),1,'Got default current page as 1, when none set');
@@ -97,15 +97,15 @@ $dp = Data::Pageset->new({
 
 # Some configs for testing
 my %config = (
-	'total_entries'		=> 300,
-	'entries_per_page'	=> 10,
-	'current_page'		=> 17
+    'total_entries'     => 300,
+    'entries_per_page'  => 10,
+    'current_page'      => 17
 );
 
 my $page_info = Data::Pageset->new({
-	'total_entries'       => $config{'total_entries'}, 
-	'entries_per_page'    => $config{'entries_per_page'}, 
-	'current_page'		  => $config{'current_page'},
+    'total_entries'     => $config{'total_entries'},
+    'entries_per_page'  => $config{'entries_per_page'},
+    'current_page'      => $config{'current_page'},
 });
 
 isa_ok($page_info,'Data::Pageset');
@@ -127,53 +127,53 @@ my $name;
 my $t = 0;
 
 foreach my $line (<DATA>) {
-  chomp $line;
-  next unless $line;
+    chomp $line;
+    next unless $line;
 
-  if ($line =~ /^# ?(.+)/) {
-    $name = $1;
-    next;
-  }
-  my @vals = map { $_ = undef if $_ eq 'undef'; $_ } split /\s+/, $line;
+    if ($line =~ /^# ?(.+)/) {
+        $name = $1;
+        next;
+    }
+    my @vals = map { $_ = undef if $_ eq 'undef'; $_ } split /\s+/, $line;
 
-  my $page = Data::Pageset->new({
-  	'total_entries'		=> $vals[0],
-	'entries_per_page'	=> $vals[1],
-	'current_page'		=> $vals[2],
-	'pages_per_set'		=> $vals[3],
-	'mode'			=> $vals[15],
-  });
+    my $page = Data::Pageset->new({
+        'total_entries'     => $vals[0],
+        'entries_per_page'  => $vals[1],
+        'current_page'      => $vals[2],
+        'pages_per_set'     => $vals[3],
+        'mode'              => $vals[15],
+    });
 
-  my @integers = (0..$vals[0]);
-  @integers = $page->splice(\@integers);
-  my $integers = join ',', @integers;
-  my $page_nums = join ',', @{$page->pages_in_set()};
-  
-  is($page->first_page, $vals[4], "$name: first page");
-  is($page->last_page, $vals[5], "$name: last page");
-  is($page->first, $vals[6], "$name: first");
-  is($page->last, $vals[7], "$name: last");
-  is($page->previous_page, $vals[8], "$name: previous_page");
-  is($page->current_page, $vals[9], "$name: current_page");
-  is($page->next_page, $vals[10], "$name: next_page");
-  is($integers, $vals[11], "$name: splice");
-  is($page->next_set(), $vals[12], "$name: next_set");
-  is($page->previous_set(), $vals[13], "$name: previous_set");
-  is($page_nums, $vals[14], "$name: pages_in_set");
+    my @integers = (0..$vals[0]);
+    @integers = $page->splice(\@integers);
+    my $integers = join ',', @integers;
+    my $page_nums = join ',', @{$page->pages_in_set()};
 
-#  my $ps = Data::Pageset->new({
-#  	'total_entries'		=> $vals[0],
-#	'entries_per_page'	=> $vals[1],
-#	'current_page'		=> $page->previous_set,
-#	'pages_per_set'		=> $vals[3],
-#	'mode'			=> $vals[15],
+    is($page->first_page, $vals[4], "$name: first page");
+    is($page->last_page, $vals[5], "$name: last page");
+    is($page->first, $vals[6], "$name: first");
+    is($page->last, $vals[7], "$name: last");
+    is($page->previous_page, $vals[8], "$name: previous_page");
+    is($page->current_page, $vals[9], "$name: current_page");
+    is($page->next_page, $vals[10], "$name: next_page");
+    is($integers, $vals[11], "$name: splice");
+    is($page->next_set(), $vals[12], "$name: next_set");
+    is($page->previous_set(), $vals[13], "$name: previous_set");
+    is($page_nums, $vals[14], "$name: pages_in_set");
+
+#   my $ps = Data::Pageset->new({
+#       'total_entries'         => $vals[0],
+#       'entries_per_page'      => $vals[1],
+#       'current_page'          => $page->previous_set,
+#       'pages_per_set'         => $vals[3],
+#       'mode'                  => $vals[15],
 #  });
 #  my $ns = Data::Pageset->new({
-#  	'total_entries'		=> $vals[0],
-#	'entries_per_page'	=> $vals[1],
-#	'current_page'		=> $page->next_set,
-#	'pages_per_set'		=> $vals[3],
-#	'mode'			=> $vals[15],
+#       'total_entries'         => $vals[0],
+#       'entries_per_page'      => $vals[1],
+#       'current_page'          => $page->next_set,
+#       'pages_per_set'         => $vals[3],
+#       'mode'                  => $vals[15],
 #  });
 #
 #  diag("totent($vals[0]) epp($vals[1]) cp($vals[9]) pps($vals[3])\n");
@@ -199,7 +199,7 @@ foreach my $line (<DATA>) {
 # 13: previous_set
 # 14: page numbers for set
 # 15: mode
- 
+
 __DATA__
 # Initial test
 50 10 1 1   1 5 1 10 undef 1 2 0,1,2,3,4,5,6,7,8,9 2 undef 1
@@ -258,16 +258,16 @@ __DATA__
 999 10 20 9 1 100 191 200 19 20 21 190,191,192,193,194,195,196,197,198,199 29 11 16,17,18,19,20,21,22,23,24 slide
 999 10 11 9 1 100 101 110 10 11 12 100,101,102,103,104,105,106,107,108,109 20 2 7,8,9,10,11,12,13,14,15 slide
 999 10 20 10 1 100 191 200 19 20 21 190,191,192,193,194,195,196,197,198,199 30 10 16,17,18,19,20,21,22,23,24,25 slide
-1070 20 54 15 1 54 1061 1070 53 54 undef 1060,1061,1062,1063,1064,1065,1066,1067,1068,1069 undef 32 40,41,42,43,44,45,46,47,48,49,50,51,52,53,54 slide 
+1070 20 54 15 1 54 1061 1070 53 54 undef 1060,1061,1062,1063,1064,1065,1066,1067,1068,1069 undef 32 40,41,42,43,44,45,46,47,48,49,50,51,52,53,54 slide
 209 10 5 5 1 21 41 50 4 5 6 40,41,42,43,44,45,46,47,48,49 10 1 3,4,5,6,7 slide
 
 # High pages - shift left two
 500 20 21 5 1 25 401 420 20 21 22    400,401,402,403,404,405,406,407,408,409,410,411,412,413,414,415,416,417,418,419 26    16 19,20,21,22,23 slide
-# High pages - shift left one    
+# High pages - shift left one
 500 20 22 5 1 25 421 440 21 22 23    420,421,422,423,424,425,426,427,428,429,430,431,432,433,434,435,436,437,438,439 27    17 20,21,22,23,24 slide
-# High pages - first fixed    
+# High pages - first fixed
 500 20 23 5 1 25 441 460 22 23 24    440,441,442,443,444,445,446,447,448,449,450,451,452,453,454,455,456,457,458,459 undef 18 21,22,23,24,25 slide
-# High pages - penultimate fixed    
+# High pages - penultimate fixed
 500 20 24 5 1 25 461 480 23 24 25    460,461,462,463,464,465,466,467,468,469,470,471,472,473,474,475,476,477,478,479 undef 18 21,22,23,24,25 slide
-# High pages - final page    
-500 20 25 5 1 25 481 500 24 25 undef 480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499 undef 18 21,22,23,24,25 slide        
+# High pages - final page
+500 20 25 5 1 25 481 500 24 25 undef 480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499 undef 18 21,22,23,24,25 slide
